@@ -33,7 +33,7 @@ starGeo.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
 
 
 
-let sprite = new THREE.TextureLoader().load( '/img/star.png' );
+let sprite = new THREE.TextureLoader().load( '/star.png' );
 let starMaterial = new THREE.PointsMaterial({
   color: 0xaaaaaa,
   size: 0.7,
