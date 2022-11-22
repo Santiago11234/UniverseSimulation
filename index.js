@@ -4,7 +4,6 @@ import {OrbitControls } from 'https://unpkg.com/three@0.146.0/examples/jsm/contr
 import Planet from "./Planet.js";
 import Rotation from "./Rotation.js"
 
-
 var day = true
 var isRotating = true;
 //code for changing sizes within website
