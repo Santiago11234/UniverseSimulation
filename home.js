@@ -1,8 +1,6 @@
 import * as THREE from "three";
 
-function run(){
 
-  var star = "star.png";
 
 //create scene object
 const scene = new THREE.Scene();
@@ -33,8 +31,7 @@ for (let i = 0; i < 5000; i++) {
     vertices.push(x, y, z);
 }
 starGeo.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
-
-let sprite = new THREE.TextureLoader().load( star);
+let sprite = new THREE.TextureLoader().load('https://as1.ftcdn.net/v2/jpg/03/38/57/74/1000_F_338577456_LQ7TWBZwHauygltRwEfZczYTdhFEKl5V.jpg');
 let starMaterial = new THREE.PointsMaterial({
   color: 0xaaaaaa,
   size: 0.7,
@@ -63,7 +60,4 @@ function animate() {
     requestAnimationFrame(animate);
     renderer.render(scene, camera);
 }
-
-}
-run();
 
