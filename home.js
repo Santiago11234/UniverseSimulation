@@ -21,6 +21,9 @@ const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
+var starImg = new Image();
+starImg.src="star.png"
+
 const starGeo = new THREE.BufferGeometry()
 const vertices = [];
 
@@ -31,7 +34,7 @@ for (let i = 0; i < 5000; i++) {
     vertices.push(x, y, z);
 }
 starGeo.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
-let sprite = new THREE.TextureLoader().load('https://as1.ftcdn.net/v2/jpg/03/38/57/74/1000_F_338577456_LQ7TWBZwHauygltRwEfZczYTdhFEKl5V.jpg');
+let sprite = new THREE.TextureLoader().load(starImg.src);
 let starMaterial = new THREE.PointsMaterial({
   color: 0xaaaaaa,
   size: 0.7,

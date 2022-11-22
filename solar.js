@@ -19,40 +19,55 @@ document.body.appendChild(renderer.domElement);
 
 //planet generation
 
+var sunImg = new Image();
+sunImg.src="sun.jpeg"
+console.log(sunImg)
 const geometrySun = new THREE.SphereGeometry(8);
 const materialSun = new THREE.MeshBasicMaterial( { 
-    map: new THREE.TextureLoader().load('/sun.jpeg')
+    map: new THREE.TextureLoader().load(sunImg.src)
 } );
 const sunMesh = new THREE.Mesh( geometrySun, materialSun );
 const solarSystem = new THREE.Group();
 solarSystem.add(sunMesh);
 scene.add( sunMesh );
     
-const mercury = new Planet(2, 16, "/mercury.png");
+
+var merImg = new Image();
+merImg.src="mercury.png"
+const mercury = new Planet(2, 16, merImg.src);
 const mercuryMesh = mercury.getMesh();
 let mercurySystem = new THREE.Group();
 mercurySystem.add(mercuryMesh);
 scene.add(mercuryMesh);
 
-const venus = new Planet(3, 32, "/venus.jpeg");
+
+var venImg = new Image();
+venImg.src="venus.jpeg"
+const venus = new Planet(3, 32, venImg.src);
 const venusMesh = venus.getMesh();
 let venusSystem = new THREE.Group();
 venusSystem.add(venusMesh);
 scene.add(venusMesh);
 
-const earth = new Planet(4, 48, "/earth.jpeg");
+var earthImg = new Image();
+earthImg.src="earth.jpeg"
+const earth = new Planet(4, 48, earthImg.src);
 const earthMesh = earth.getMesh();
 const earthSystem = new THREE.Group();
 earthSystem.add(earthMesh);
 scene.add(earthMesh);
 
-const moon = new Planet(1, 50, "/mercury.png");
+var mooImg = new Image();
+mooImg.src="moonDay.jpeg"
+const moon = new Planet(1, 50, mooImg.src);
 const moonMesh = moon.getMesh();
 let moonSystem = new THREE.Group();
 moonSystem.add(moonMesh);
 scene.add(moonMesh);
 
-const mars = new Planet(3, 64, "/mars.jpeg");
+var marImg = new Image();
+marImg.src="mars.jpeg"
+const mars = new Planet(3, 64, marImg.src);
 const marsMesh = mars.getMesh();
 let marsSystem = new THREE.Group();
 marsSystem.add(marsMesh);
@@ -117,7 +132,7 @@ starGeo.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
 
 
 
-let sprite = new THREE.TextureLoader().load( '/star.png' );
+let sprite = new THREE.TextureLoader().load( 'https://as1.ftcdn.net/v2/jpg/03/38/57/74/1000_F_338577456_LQ7TWBZwHauygltRwEfZczYTdhFEKl5V.jpg' );
 let starMaterial = new THREE.PointsMaterial({
   color: 0xaaaaaa,
   size: 0.7,

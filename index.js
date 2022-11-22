@@ -11,31 +11,45 @@ const gui = new dat.GUI();
 const world = {
     earth: {
         radius: 2.5,
-        DayLight: false,
+        DayLight: true,
         stopRotation: false
     }
 }
+
+var mooNImg = new Image();
+mooNImg.src="moonNigh.jpeg"
+var mooDImg= new Image();
+mooDImg.src="moonDay.jpeg"
+var earthImg = new Image();
+earthImg.src="earth.jpeg"
+var earthNImg = new Image();
+earthNImg.src="earthNight.jpeg"
+var sunImg = new Image();
+sunImg.src="sun.jpeg"
+var starImg = new Image();
+starImg.src="star.png"
+
 
 gui.add(world.earth, 'DayLight').onChange(function (value) {
     if(day) {
         earthMesh.material.dispose()
         earthMesh.material = new THREE.MeshBasicMaterial( { 
-            map: new THREE.TextureLoader().load('/earthNight.jpeg')
+            map: new THREE.TextureLoader().load(earthNImg.src)
          } ); 
         moonMesh.material.dispose()
         moonMesh.material = new THREE.MeshBasicMaterial( { 
-            map: new THREE.TextureLoader().load('/moonNigh.jpeg'),
+            map: new THREE.TextureLoader().load(mooNImg.src),
             
          } ); 
     }
     else {
         earthMesh.material.dispose()
         earthMesh.material = new THREE.MeshBasicMaterial( { 
-            map: new THREE.TextureLoader().load('/earth.jpeg')
+            map: new THREE.TextureLoader().load(earthImg.src)
          } ); 
         moonMesh.material.dispose()
         moonMesh.material = new THREE.MeshBasicMaterial( { 
-            map: new THREE.TextureLoader().load('/moonDay.jpeg')
+            map: new THREE.TextureLoader().load(mooDImg.src)
          } ); 
     }
     day = !day;
@@ -63,7 +77,7 @@ document.body.appendChild(renderer.domElement);
 //creates the earth
 const earthgeometry = new THREE.SphereGeometry(2.5,25);
 const earthmaterial = new THREE.MeshBasicMaterial( { 
-    map: new THREE.TextureLoader().load('/earth.jpeg')
+    map: new THREE.TextureLoader().load(earthImg.src)
  } );
 const earthMesh = new THREE.Mesh( earthgeometry, earthmaterial );
 const earthSystem = new THREE.Group();
@@ -73,7 +87,7 @@ scene.add(earthMesh);
 //sun
 const sungeometry = new THREE.SphereGeometry(100,25,25);
 const sunmaterial = new THREE.MeshBasicMaterial( { 
-    map: new THREE.TextureLoader().load('/sun.jpeg')
+    map: new THREE.TextureLoader().load(sunImg.src)
     
  } );
 const sun = new THREE.Mesh( sungeometry, sunmaterial );
@@ -82,7 +96,7 @@ sun.position.x = 100
 sun.position.z = -200
 
 //moon
-const moon = new Planet(1, 50, "/moonDay.jpeg");
+const moon = new Planet(1, 50, mooDImg.src);
 const moonMesh = moon.getMesh();
 let moonSystem = new THREE.Group();
 moonSystem.add(moonMesh);
@@ -106,7 +120,7 @@ for (let i = 0; i < 5000; i++) {
 }
 starGeo.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
 
-let sprite = new THREE.TextureLoader().load( "/star.png");
+let sprite = new THREE.TextureLoader().load(starImg.src);
 let starMaterial = new THREE.PointsMaterial({
   color: 0xaaaaaa,
   size: 0.7,
