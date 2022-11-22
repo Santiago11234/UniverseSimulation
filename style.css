@@ -1,0 +1,12 @@
+body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    background: black;
+    overflow: hidden;
+  }
+
+.font-exo {
+    
+    font-family: 'Exo 2', sans-serif;
+} 
