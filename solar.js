@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import {OrbitControls } from 'https://unpkg.com/three@0.146.0/examples/jsm/controls/OrbitControls.js';
-import Planet from "../Planet.js";
+import Planet from "./Planet.js";
 import Rotation from "./Rotation.js"
 import Ring from "./Ring.js";
 
