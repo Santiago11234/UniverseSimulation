@@ -17,17 +17,17 @@ const world = {
 }
 
 var mooNImg = new Image();
-mooNImg.src="/images/moonNigh.jpeg"
+mooNImg.src="images/moonNigh.jpeg"
 var mooDImg= new Image();
-mooDImg.src="/images/moonDay.jpeg"
+mooDImg.src="images/moonDay.jpeg"
 var earthImg = new Image();
-earthImg.src="/images/earth.jpeg"
+earthImg.src="images/earth.jpeg"
 var earthNImg = new Image();
-earthNImg.src="/images/earthNight.jpeg"
+earthNImg.src="images/earthNight.jpeg"
 var sunImg = new Image();
-sunImg.src="/images/sun.jpeg"
+sunImg.src="images/sun.jpeg"
 var starImg = new Image();
-starImg.src="/images/star.png"
+starImg.src="images/star.png"
 
 
 gui.add(world.earth, 'DayLight').onChange(function (value) {

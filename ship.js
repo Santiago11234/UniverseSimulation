@@ -31,7 +31,7 @@ function init() {
     scene.environment = pmremGenerator.fromScene( new RoomEnvironment(), 0.04 ).texture;
 
     const loader = new GLTFLoader()
-    loader.load('/assets/space.glb', function(glb) {
+    loader.load('assets/space.glb', function(glb) {
         scene.add( glb.scene );
         glb.scene.scale.set(0.2,0.2,0.2)
         const shadowMesh = createSpotShadowMesh();

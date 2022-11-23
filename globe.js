@@ -42,12 +42,12 @@ const world = {
 }
 
 var earthImg = new Image();
-earthImg.src="/images/earth.jpeg"
+earthImg.src="images/earth.jpeg"
 var earthNImg = new Image();
-earthNImg.src="/images/earthNight.jpeg"
+earthNImg.src="images/earthNight.jpeg"
 
 var starImg = new Image();
-starImg.src="/images/star.png"
+starImg.src="images/star.png"
 
 
 gui.add(world.earth, 'stopRotation', false).onChange(function (value) {

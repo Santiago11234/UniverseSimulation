@@ -31,7 +31,7 @@ function init() {
     scene.environment = pmremGenerator.fromScene( new RoomEnvironment(), 0.04 ).texture;
 
     const loader = new GLTFLoader()
-    loader.load('/assets/wraith.glb', function(glb) {
+    loader.load('assets/wraith.glb', function(glb) {
         scene.add( glb.scene );
         glb.scene.scale.set(0.02,0.02,0.02)
         const shadowMesh = createSpotShadowMesh();
