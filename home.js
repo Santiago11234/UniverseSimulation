@@ -22,7 +22,7 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
 var starImg = new Image();
-starImg.src="star.png"
+starImg.src="/images/star.png"
 
 const starGeo = new THREE.BufferGeometry()
 const vertices = [];

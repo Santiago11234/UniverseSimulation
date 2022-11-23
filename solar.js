@@ -1,8 +1,8 @@
 import * as THREE from "three";
 import {OrbitControls } from 'https://unpkg.com/three@0.146.0/examples/jsm/controls/OrbitControls.js';
-import Planet from "./Planet.js";
-import Rotation from "./Rotation.js"
-import Ring from "./Ring.js";
+import Ring from "./js/Ring.js"
+import Rotation from "./js/Rotation.js"
+import Planet from "./js/Planet.js";
 
 
 //set up stuff
@@ -20,8 +20,7 @@ document.body.appendChild(renderer.domElement);
 //planet generation
 
 var sunImg = new Image();
-sunImg.src="sun.jpeg"
-console.log(sunImg)
+sunImg.src="/images/sun.jpeg"
 const geometrySun = new THREE.SphereGeometry(8);
 const materialSun = new THREE.MeshBasicMaterial( { 
     map: new THREE.TextureLoader().load(sunImg.src)
@@ -33,7 +32,7 @@ scene.add( sunMesh );
     
 
 var merImg = new Image();
-merImg.src="mercury.png"
+merImg.src="/images/mercury.png"
 const mercury = new Planet(2, 16, merImg.src);
 const mercuryMesh = mercury.getMesh();
 let mercurySystem = new THREE.Group();
@@ -42,7 +41,7 @@ scene.add(mercuryMesh);
 
 
 var venImg = new Image();
-venImg.src="venus.jpeg"
+venImg.src="/images/venus.jpeg"
 const venus = new Planet(3, 32, venImg.src);
 const venusMesh = venus.getMesh();
 let venusSystem = new THREE.Group();
@@ -50,7 +49,7 @@ venusSystem.add(venusMesh);
 scene.add(venusMesh);
 
 var earthImg = new Image();
-earthImg.src="earth.jpeg"
+earthImg.src="/images/earth.jpeg"
 const earth = new Planet(4, 48, earthImg.src);
 const earthMesh = earth.getMesh();
 const earthSystem = new THREE.Group();
@@ -58,7 +57,7 @@ earthSystem.add(earthMesh);
 scene.add(earthMesh);
 
 var mooImg = new Image();
-mooImg.src="moonDay.jpeg"
+mooImg.src="/images/moonDay.jpeg"
 const moon = new Planet(1, 50, mooImg.src);
 const moonMesh = moon.getMesh();
 let moonSystem = new THREE.Group();
@@ -66,7 +65,7 @@ moonSystem.add(moonMesh);
 scene.add(moonMesh);
 
 var marImg = new Image();
-marImg.src="mars.jpeg"
+marImg.src="/images/mars.jpeg"
 const mars = new Planet(3, 64, marImg.src);
 const marsMesh = mars.getMesh();
 let marsSystem = new THREE.Group();
@@ -132,7 +131,7 @@ starGeo.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
 
 
 
-let sprite = new THREE.TextureLoader().load( 'https://as1.ftcdn.net/v2/jpg/03/38/57/74/1000_F_338577456_LQ7TWBZwHauygltRwEfZczYTdhFEKl5V.jpg' );
+let sprite = new THREE.TextureLoader().load( '/images/star.png' );
 let starMaterial = new THREE.PointsMaterial({
   color: 0xaaaaaa,
   size: 0.7,

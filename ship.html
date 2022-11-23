@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Globe</title>  
+    <script type="importmap">
+        {
+          "imports": {
+            "three": "https://unpkg.com/three@0.146.0/build/three.module.js",
+            "dat": "https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.2/dat.gui.js"
+          }
+        }
+      </script>
+      <script src="https://cdn.tailwindcss.com"></script>
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@1,300&display=swap" rel="stylesheet">      
+      <style>
+        body {
+				background-color: #eee;
+			}
+			#info {
+				color: #222;
+			}
+			a {
+				color: #00f
+			}
+			#button {
+				position: absolute;
+				bottom: 15px;
+				left: calc(50% - 40px);
+
+			}
+      </style>
+</head>
+<body>
+
+    <div id="app">
+        <div class="absolute text-black text-center font-ex mt-5" style=" font-family: 'Exo 2', sans-serif; transform: translate(-50%, -50%); left: 50%">
+            <p class="text-7xl mt-10 aria-hidden="true"> vroom Vroom</p>
+        </div>
+        <a href="index.html">
+          <input type="button" value="Home" 
+          class="text-xl border px-4 py-2 rounded-lg uppercase ml-8 mt-8  bg-black text-white hover:bg-gray-800"
+          role="button">
+        </a>
+    </div>
+    
+
+    <canvas class="webgl"></canvas>
+    <script type="module" src="./ship.js"></script>
+</body>
+</html>

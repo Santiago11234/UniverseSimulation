@@ -1,8 +1,8 @@
 
 import * as THREE from 'three';
 import {OrbitControls } from 'https://unpkg.com/three@0.146.0/examples/jsm/controls/OrbitControls.js';
-import Planet from "./Planet.js";
-import Rotation from "./Rotation.js"
+import Planet from "./js/Planet.js";
+import Rotation from "./js/Rotation.js"
 
 var day = true
 var isRotating = true;
@@ -17,17 +17,17 @@ const world = {
 }
 
 var mooNImg = new Image();
-mooNImg.src="moonNigh.jpeg"
+mooNImg.src="/images/moonNigh.jpeg"
 var mooDImg= new Image();
-mooDImg.src="moonDay.jpeg"
+mooDImg.src="/images/moonDay.jpeg"
 var earthImg = new Image();
-earthImg.src="earth.jpeg"
+earthImg.src="/images/earth.jpeg"
 var earthNImg = new Image();
-earthNImg.src="earthNight.jpeg"
+earthNImg.src="/images/earthNight.jpeg"
 var sunImg = new Image();
-sunImg.src="sun.jpeg"
+sunImg.src="/images/sun.jpeg"
 var starImg = new Image();
-starImg.src="star.png"
+starImg.src="/images/star.png"
 
 
 gui.add(world.earth, 'DayLight').onChange(function (value) {
