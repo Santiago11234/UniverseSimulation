@@ -29,8 +29,6 @@ var Shaders = {
     }
   };
 
-
-
 var isRotating = false;
 //code for changing sizes within website
 const gui = new dat.GUI();
@@ -69,15 +67,48 @@ renderer.setPixelRatio(devicePixelRatio);
 document.body.appendChild(renderer.domElement);
 
 
-//creates the earth
-const earthgeometry = new THREE.SphereGeometry(1,50,50);
-const earthmaterial = new THREE.MeshBasicMaterial( { 
-    map: new THREE.TextureLoader().load(earthImg.src)
- } );
-const earthMesh = new THREE.Mesh( earthgeometry, earthmaterial );
-scene.add(earthMesh);
+// //creates the earth
+// const earthgeometry = new THREE.SphereGeometry(1,50,50);
+// const earthmaterial = new THREE.MeshBasicMaterial( { 
+//     map: new THREE.TextureLoader().load(earthImg.src)
+//  } );
+// const earthMesh = new THREE.Mesh( earthgeometry, earthmaterial );
+// scene.add(earthMesh);
 
+const beanGeo = new THREE.CapsuleGeometry(100,100, 10000)
+const beanMat = new THREE.MeshBasicMaterial( { color: '#FF0000' })
+const beanMesh = new THREE.Mesh(beanGeo, beanMat)
+scene.add(beanMesh)
 
+const eyesGeo = new THREE.CapsuleGeometry(30,50, 10000)
+const eyesMat = new THREE.MeshBasicMaterial( { color: '#89CFF0' })
+const eyesMesh = new THREE.Mesh(eyesGeo, eyesMat)
+eyesMesh.rotation.z = 1.6
+eyesMesh.position.z = 100
+eyesMesh.position.y = 40
+scene.add(eyesMesh)
+
+const leg1Geo = new THREE.CapsuleGeometry(30,50, 10000)
+const leg1Mat = new THREE.MeshBasicMaterial( { color: '#FF0000' })
+const leg1Mesh = new THREE.Mesh(leg1Geo, leg1Mat)
+leg1Mesh.position.y = -130
+leg1Mesh.position.x = 40
+leg1Mesh.position.z = 30
+scene.add(leg1Mesh)
+
+const leg2Geo = new THREE.CapsuleGeometry(30,50, 10000)
+const leg2Mat = new THREE.MeshBasicMaterial( { color: '#FF0000' })
+const leg2Mesh = new THREE.Mesh(leg2Geo, leg2Mat)
+leg2Mesh.position.y = -130
+leg2Mesh.position.x = -40
+leg2Mesh.position.z = 30
+scene.add(leg2Mesh)
+
+const backGeo = new THREE.BoxGeometry( 120,130, 70 );
+const backMat = new THREE.MeshBasicMaterial( {color: '#e00000'} );
+const backMesh = new THREE.Mesh( backGeo, backMat );
+backMesh.position.z = -80
+scene.add( backMesh );
 
 //stars
 const starGeo = new THREE.BufferGeometry()
@@ -142,9 +173,10 @@ camera.position.z = 3;
 
 var t =0;
 function animate() {
-    
+  
+
 if(isRotating === true) {
-    earthMesh.rotation.y += 0.01
+    beanMesh.rotation.y += 0.01
     rings.forEach(r => {
       r.rotation.y +=0.001
       r.rotation.z +=0.001
@@ -152,6 +184,7 @@ if(isRotating === true) {
     })
     
     
+
 const array = starGeo.attributes.position.array
     
 for(let i = 0; i < array.length; i+=6){

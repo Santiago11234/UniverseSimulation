@@ -182,7 +182,6 @@ starGeo.attributes.position.needsUpdate = true
 }
 
 
-
     requestAnimationFrame(animate);
     renderer.render(scene, camera);
  

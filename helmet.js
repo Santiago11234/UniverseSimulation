@@ -8,11 +8,9 @@ import {OrbitControls } from 'https://unpkg.com/three@0.146.0/examples/jsm/contr
 import { RoomEnvironment} from './three.js-master/examples/jsm/environments/RoomEnvironment.js'
 
 let camera, scene, renderer;
-
 init();
-render();
-
 function init() {
+
 
     renderer = new THREE.WebGLRenderer( { antialias: true } );
     renderer.setPixelRatio( window.devicePixelRatio );
@@ -30,19 +28,6 @@ function init() {
     scene.background = new THREE.Color( 0xf0f0f0 );
     scene.environment = pmremGenerator.fromScene( new RoomEnvironment(), 0.04 ).texture;
 
-    const loader = new GLTFLoader()
-    loader.load('assets/wraith.glb', function(glb) {
-        scene.add( glb.scene );
-        glb.scene.scale.set(0.02,0.02,0.02)
-        const shadowMesh = createSpotShadowMesh();
-        shadowMesh.position.y = - 1.1;
-        shadowMesh.position.z = - 0.25;
-        shadowMesh.scale.setScalar( 2 );
-        scene.add( shadowMesh );
-
-        render();
-    })
-    
 
     const controls = new OrbitControls( camera, renderer.domElement );
     controls.addEventListener( 'change', render ); // use if there is no animation loop
@@ -53,51 +38,81 @@ function init() {
 
     window.addEventListener( 'resize', onWindowResize );
 
+    var model;
+    const loader = new GLTFLoader()
+    loader.load('assets/banana.glb', function(glb) {
+        //0.02
+        glb.scene.scale.set(0.15,0.15,0.15)
+        model = glb.scene
+        scene.add( model );
+        const shadowMesh = createSpotShadowMesh();
+        shadowMesh.position.y = - 1.1;
+        shadowMesh.position.z = - 0.25;
+        shadowMesh.scale.setScalar( 2 );
+        scene.add( shadowMesh );
+        render();
+    })
+    
+
+    function createSpotShadowMesh() {
+
+        const canvas = document.createElement( 'canvas' );
+        canvas.width = 128;
+        canvas.height = 128;
+    
+        const context = canvas.getContext( '2d' );
+        const gradient = context.createRadialGradient( canvas.width / 2, canvas.height / 2, 0, canvas.width / 2, canvas.height / 2, canvas.width / 2 );
+        gradient.addColorStop( 0.1, 'rgba(130,130,130,1)' );
+        gradient.addColorStop( 1, 'rgba(255,255,255,1)' );
+    
+        context.fillStyle = gradient;
+        context.fillRect( 0, 0, canvas.width, canvas.height );
+    
+        const shadowTexture = new THREE.CanvasTexture( canvas );
+    
+        const geometry = new THREE.PlaneGeometry();
+        const material = new THREE.MeshBasicMaterial( {
+            map: shadowTexture, blending: THREE.MultiplyBlending, toneMapped: false
+        } );
+    
+        const mesh = new THREE.Mesh( geometry, material );
+        mesh.rotation.x = - Math.PI / 2;
+    
+        return mesh;
+    
+    }
+    
+    function onWindowResize() {
+    
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+    
+        renderer.setSize( window.innerWidth, window.innerHeight );
+    
+        render();
+    
+    }
+    
+    //
+    
+    function render() {
+    
+        renderer.render( scene, camera );
+    
+    }
+    
+    
+    function animate() {
+        console.log("hi")
+        model.rotation.x += 0.01
+        requestAnimationFrame(animate);
+        renderer.render(scene, camera);
+    }
+    
+    
+    animate()
+
 }
 
-function createSpotShadowMesh() {
 
-    const canvas = document.createElement( 'canvas' );
-    canvas.width = 128;
-    canvas.height = 128;
 
-    const context = canvas.getContext( '2d' );
-    const gradient = context.createRadialGradient( canvas.width / 2, canvas.height / 2, 0, canvas.width / 2, canvas.height / 2, canvas.width / 2 );
-    gradient.addColorStop( 0.1, 'rgba(130,130,130,1)' );
-    gradient.addColorStop( 1, 'rgba(255,255,255,1)' );
-
-    context.fillStyle = gradient;
-    context.fillRect( 0, 0, canvas.width, canvas.height );
-
-    const shadowTexture = new THREE.CanvasTexture( canvas );
-
-    const geometry = new THREE.PlaneGeometry();
-    const material = new THREE.MeshBasicMaterial( {
-        map: shadowTexture, blending: THREE.MultiplyBlending, toneMapped: false
-    } );
-
-    const mesh = new THREE.Mesh( geometry, material );
-    mesh.rotation.x = - Math.PI / 2;
-
-    return mesh;
-
-}
-
-function onWindowResize() {
-
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-
-    renderer.setSize( window.innerWidth, window.innerHeight );
-
-    render();
-
-}
-
-//
-
-function render() {
-
-    renderer.render( scene, camera );
-
-}
