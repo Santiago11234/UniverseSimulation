@@ -11,6 +11,8 @@ var mooDImg= new Image();
 mooDImg.src="images/moonDay.jpeg"
 var earthImg = new Image();
 earthImg.src="images/earth.jpeg"
+var earthRotation = 0.002;
+var shipSpeed = 0.005
 
 //init all three.js create compononets
 
@@ -57,27 +59,27 @@ new OrbitControls(camera, renderer.domElement);
 camera.position.z = 10;
 
 
-var gltf;
+var gltf1;
 var gltf2;
 var gltf3;
 var loader = new GLTFLoader()
 
-// loader.load('assets/space.glb', function(model) {
-//     //0.02
-//     model.scene.scale.set(0.1,0.1,0.1)
-//     gltf3 = model
-//     gltf3.scene.rotation.y = 2
-//     gltf3.scene.rotation.x = 2
-//     scene.add(gltf3.scene)
-//     runSec();
-// })
+loader.load('assets/space.glb', function(model) {
+    //0.02
+    model.scene.scale.set(0.065,0.065,0.065)
+    gltf3 = model
+    gltf3.scene.rotation.y = 2
+    gltf3.scene.rotation.x = 2
+    scene.add(gltf3.scene)
+    runSec();
+})
 
-runSec();
+
 
 function runSec() {
     loader.load('assets/space.glb', function(model) {
         //0.02
-        model.scene.scale.set(0.1,0.1,0.1)
+        model.scene.scale.set(0.065,0.065,0.065)
         gltf2 = model
         gltf2.scene.rotation.x = 1
         scene.add(gltf2.scene)
@@ -91,15 +93,63 @@ function runSec() {
 function runlast() {
     loader.load('assets/space.glb', function(model) {
         //0.02
-        model.scene.scale.set(0.1,0.1,0.1)
-        gltf = model
-        gltf.scene.rotation.z = -1.5; 
-        scene.add(gltf.scene)
+        model.scene.scale.set(0.065,0.065,0.065)
+        gltf1 = model
+        gltf1.scene.rotation.z = -1.5; 
+        scene.add(gltf1.scene)
     
         animate();
     })
     
 }
+
+const raycaster = new THREE.Raycaster();
+
+var infoDiv = document.createElement("div");
+infoDiv.style.position = "absolute";
+infoDiv.style.backgroundColor = "white";
+infoDiv.style.padding = "10px";
+infoDiv.style.display = "none";
+document.body.appendChild(infoDiv);
+
+// Create a button within the div
+var button = document.createElement("button");
+button.innerHTML = "Click Me";
+infoDiv.appendChild(button);
+
+// Listen for mouse events on the canvas
+renderer.domElement.addEventListener("mousemove", onMouseMove);
+
+// Function to handle mouse events
+function onMouseMove(event) {
+  // Calculate mouse position in normalized device coordinates
+  var mouse = new THREE.Vector2();
+  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+  // Update the raycaster to point in the direction of the mouse
+  raycaster.setFromCamera(mouse, camera);
+
+  // Check if the raycaster intersects the spaceship
+  var intersects = raycaster.intersectObjects([gltf1.scene, gltf2.scene]);
+
+  // If the raycaster intersects the spaceship, update the position of the info div
+  if (intersects.length > 0) {
+    infoDiv.style.left = event.clientX + "px";
+    infoDiv.style.top = event.clientY + "px";
+    infoDiv.innerHTML = "santi is a god";
+    infoDiv.style.display = "block";
+    earthRotation = .0005
+    shipSpeed = 0.0003
+  } else {
+    infoDiv.style.display = "none";
+    earthRotation = 0.002
+    shipSpeed = 0.005
+  }
+}
+
+
+
 
 
 var t =0;
@@ -108,37 +158,25 @@ var angle = 0;
 function animate() {
     if(isRotating === true) {
         angle += 0.01
-         earthMesh.rotation.y += 0.01
+         earthMesh.rotation.y += earthRotation
         
-        gltf.scene.position.x =  5*Math.cos(t) + 0;
-        gltf.scene.position.z =  5*Math.sin(t) + 0; 
-        gltf.scene.rotation.y -= 0.01
+        gltf1.scene.position.x =  3*Math.cos(t) + 0;
+        gltf1.scene.position.z =  3*Math.sin(t) + 0; 
+        gltf1.scene.rotation.y -= shipSpeed
         
-        gltf2.scene.position.y = 5*Math.cos(t+1) + 0;
-        gltf2.scene.position.z = 5*Math.sin(t+1) + 0; 
-        gltf2.scene.rotation.x += 0.01
+        gltf2.scene.position.y = 3*Math.cos(t+1) + 0;
+        gltf2.scene.position.z = 3*Math.sin(t+1) + 0; 
+        gltf2.scene.rotation.x += shipSpeed
 
-        // gltf3.scene.position.y = 5*Math.cos(t+2) + 0;
-        // gltf3.scene.position.z = 5*Math.sin(t+2) + 0; 
-        // gltf3.scene.position.x = 5*Math.sin(t+2) + 0; 
-        // gltf3.scene.rotation.y += 0.01
-        // gltf3.scene.rotation.z += 0.01
-        // gltf3.scene.rotation.x += 0.01
-       
-     
-
-        
-
-        // Rotate the second spaceship around its own axis
-        gltf3.scene.rotation.y += 0.01;
-                    
-
-       
-        
-        t+= 0.01
+        gltf3.scene.position.y = 5*Math.cos(t+2) + 0;
+        gltf3.scene.position.z = 5*Math.sin(t+2) + 0; 
+        gltf3.scene.position.x = 5*Math.sin(t+2) + 0; 
+        gltf3.scene.rotation.y += shipSpeed
+        gltf3.scene.rotation.z += shipSpeed
+        gltf3.scene.rotation.x += shipSpeed
+                
+        t+= shipSpeed
     }
     requestAnimationFrame(animate);
     renderer.render(scene, camera);
 }
-
-
