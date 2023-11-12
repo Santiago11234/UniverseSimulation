@@ -131,22 +131,10 @@ const stars = new THREE.Points(starGeo,starMaterial);
 scene.add(stars);
 
 
-
-
-//add light for the front and back
-const light = new THREE.DirectionalLight(0xFFFFFF,0);
-light.position.set(0,10,0);
-light.castShadow = true
-scene.add(light);
-
-scene.add(camera);
-
-
-
-
-
 //what actually displays the images
 new OrbitControls(camera, renderer.domElement);
+
+
 camera.position.z = 10;
 
 var t =0;
